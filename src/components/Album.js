@@ -33,6 +33,27 @@ class Album extends Component {
              <col id="song-duration-column" />
            </colgroup>  
            <tbody>
+             {
+             this.state.album.songs.map( (song, index) =>
+             <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.onMouseEnter(index)} onMouseLeave={() => this.onMouseLeave(index)}>
+                <td> <button id="song-action-btns">{
+             (this.state.currentSong.title === song.title) ?
+               <span className={this.state.isPlaying ? "ion-pause" : "ion-play"}></span>
+                  :
+               (this.state.isHovered === index) ?
+                <span className="ion-play"></span>
+                  :
+                 <span className="song-number">{index+1}</span>
+
+                    }</button>
+             </td>
+
+
+                <td className="song-title-row">{song.title}</td>
+                <td className="song-duration-row">{this.formatTime(song.duration)}</td>
+              </tr>
+                )
+              }  
            </tbody>
          </table> 
        </section>
