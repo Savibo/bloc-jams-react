@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
+import PlayerBar from './PlayerBar';
 
 function IconPlay(props) {
   return (
@@ -127,8 +128,15 @@ class Album extends Component {
 
                     }</button>
              </td>
-
-
+                      <Icon 
+                      className="song-number"
+                      song={song} 
+                      index={index} 
+                      hover={this.state.hover} 
+                      hoverSong={this.state.hoverSong} 
+                      isPlaying={this.state.isPlaying} 
+                      currentSong={this.state.currentSong} 
+                    />
                 <td className="song-title-row">{song.title}</td>
                 <td className="song-duration-row">{this.formatTime(song.duration)}</td>
               </tr>
@@ -136,7 +144,8 @@ class Album extends Component {
               }  
            </tbody>
          </table> 
-       </section>
+         <PlayerBar />
+        </section>
      );
    }
  }
