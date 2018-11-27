@@ -21,9 +21,9 @@ function IconNumber(props) {
 
 class Icon extends Component {
   render () {
-    const hover = this.props.hover;
-    const isPlaying = this.props.isPlaying;
     const currentSong = this.props.currentSong;
+    const isPlaying = this.props.isPlaying;
+    const hover = this.props.hover;
     const hoverSong = this.props.hoverSong;
     const index = this.props.index;
     const song = this.props.song;
