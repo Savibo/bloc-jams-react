@@ -1,6 +1,54 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
 
+function IconPlay(props) {
+  return (
+    <span className="icon ion-md-play"></span>
+  );
+}
+
+function IconPause(props) {
+  return (
+    <span className="icon ion-md-pause"></span>
+  );
+}
+
+function IconNumber(props) {
+  return (
+    <span>{props.index + 1}</span>
+  );
+}
+
+class Icon extends Component {
+  render () {
+    const hover = this.props.hover;
+    const isPlaying = this.props.isPlaying;
+    const currentSong = this.props.currentSong;
+    const hoverSong = this.props.hoverSong;
+    const index = this.props.index;
+    const song = this.props.song;
+    const isSameSong = hoverSong === song;
+    const sameSongPlaying = currentSong === song && isPlaying;
+    let icon;
+
+    if (hover && isSameSong && !sameSongPlaying) {
+      icon = <IconPlay />
+    } else if (sameSongPlaying || (currentSong === !null && isPlaying)) {
+      icon = <IconPause />
+    } else if (currentSong === song && !isPlaying) {
+      icon = <IconPlay />
+    } else {
+      icon = <IconNumber index={index} />
+    }
+
+    return (
+      <td className="song-number">{icon}</td>
+    )
+  }
+}
+
+
+
 class Album extends Component {
    constructor(props) {
      super(props);
