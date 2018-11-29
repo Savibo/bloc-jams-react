@@ -143,6 +143,20 @@ handleNextClick() {
     this.audioElement.volume = newVolume;
   }
  
+  formatTime(initTime) {
+    const minutes = Math.floor((initTime % 3600) / 60);
+    const seconds = Math.floor(initTime % 60);
+
+    let finalTime = "";
+
+    if (Number.isNaN(initTime)) {
+      return "-:--"
+    }
+    finalTime += `${minutes}:${(seconds < 10 ? "0" : "")}`;
+    finalTime += `${seconds}`;
+    return finalTime;
+  }
+
    render() {
      return (
        <section className="album">
