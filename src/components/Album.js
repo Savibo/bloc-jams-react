@@ -89,10 +89,6 @@ class Album extends Component {
      this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchange);
    }
  
-   }
- 
-   }
- 
     play() {
      this.audioElement.play();
      this.setState({ isPlaying: true });
