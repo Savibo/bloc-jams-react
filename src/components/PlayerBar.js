@@ -5,13 +5,13 @@ import React, { Component } from 'react';
      return (
        <section className="player-bar">
          <section id="buttons">
-         <button id="previous" onClick={this.props.handlePrevClick}>
+         <button id="previous" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.handlePrevClick}>
             <span className="ion-skip-backward"></span>
            </button>
-           <button id="play-pause" onClick={this.props.handleSongClick} >   
+           <button id="play-pause" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.handleSongClick} >   
           <span className={this.props.isPlaying ? 'ion-pause' : 'ion-play'}></span>
            </button>
-           <button id="next" onClick={this.props.handleNextClick}>
+           <button id="next" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.props.handleNextClick}>
              <span className="ion-skip-forward"></span>
            </button>
          </section>
@@ -19,7 +19,8 @@ import React, { Component } from 'react';
            <div className="current-time">{this.props.currentTime}</div>
            <input 
              type="range" 
-             className="seek-bar" 
+             className="seek-bar mdl-slider mdl-js-slider"
+ 
              value={(this.props.currentTime / this.props.duration) || 0} 
              max="1" 
              min="0" 
@@ -32,7 +33,7 @@ import React, { Component } from 'react';
             <div className="icon ion-md-volume-low volume-low"></div>
             <input 
               type="range" 
-              className="seek-bar" 
+              className="seek-bar mdl-slider mdl-js-slider"
               value={this.props.volume || 0}
               max="1"
               min="0"
