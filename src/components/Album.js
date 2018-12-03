@@ -119,7 +119,8 @@ class Album extends Component {
            </div>
          </section>
            
-       <table id="songs">
+           <table id="song-list" className="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+
            <colgroup>
              <col id="song-number-column" />
              <col id="song-title-column" />
@@ -132,19 +133,20 @@ class Album extends Component {
                 onMouseLeave={ () => this.setState({ isHovered: false }) }
               >
               <td> <button id="song-action-btns"> 
-              { (this.state.currentSong.title === song.title) ?
-               <span className={this.state.isPlaying ? "ion-pause" : "ion-play"}></span>
+              { (this.state.currentSong.title === song.title) }
+                <span className="ion-pause material-icons"></span>
                   :
                (this.state.isHovered === index) ?
-                <span className="ion-play"></span>
+                <span className="ion-play material-icons"></span>
+
                   :
-                 <span className="song-number">{index+1}</span>
-               }
+
+               <span className="song-number material-icons">{index+1}</span>
              </button>
              </td>
-                <td className="song-title-row">{song.title}</td>
-                <td className="song-duration-row">{this.formatTime(song.duration)}</td>
-              </tr>
+              <td className="song-title mdl-data-table__cell--non-numeric">{song.title}</td>
+              <td className="song-duration mdl-data-table__cell--non-numeric">{song.duration}</td>              
+                </tr>
                 )
               }  
            </tbody>
