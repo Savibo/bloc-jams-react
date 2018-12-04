@@ -1,13 +1,169 @@
+/* Global */
+
+h1, h2, p {
+  margin: 0
+}
+
 body {
   margin: 0;
-  padding: 0;
+  padding: 15;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.container {
+  width: 50%;
+  margin: auto;
+}
+.link {
+  color: #E9CADE;
+  text-transform: uppercase;
+  padding: 10px 0;
+  float: center;
+}
+.link:hover {
+  color: #FF3399
+}
 
+/*Header*/
+
+header {
+  border-bottom: #000000 2px solid;
+  padding: 10px 0;
+}
+
+.navbar{
+  text-align: center;
+  color: #ff3399;
+}
+.navbar h1 {
+  padding: 10px 0;
+}
+
+.navbar nav .link {
+  padding :10px 20px;
+}
+
+/* Landing Page */
+
+.hero-title {
+  margin: 0;
+  text-align: center;
+  font size: 30px;
+  color: #000000;
+}
+
+.point-title {
+  padding :30px 10px 10px 10px
+}
+
+.point-description {
+  padding :10px;
+}
+
+/* Library Page */
+
+.album-card {
+  box-sizing:border-box;
+  text-align: center;
+  margin: 20px auto 15px auto;
+  padding-bottom: 10px;
+  }
+
+.album card img {
+  width: 100%;  
+  padding-bottom: 10px;
+}
+
+.album-link {
+  text-decoration: none;
+  color: #000000;
+}
+
+.album-link:hover {
+  color: #E9CADE;
+}
+
+*/ Album Page */ 
+
+#album-detail {
+  margin: 10px auto;
+  border: #000000 solid 1px;
+  text-align: center;
+}
+
+#album-cover-art {
+  width: 100%;
+}
+
+#album-title {
+  padding: 5px;
+}
+
+.artist {
+  padding: 5px;
+}
+
+#release-info {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+#song-list {
+  margin: 5px auto 10px auto;
+}
+
+.song-number {
+  padding: 0 10px;
+}
+
+.song-title {
+  text-align: center;
+}
+
+.song-duration {
+  padding: 0 10px;
+}
+
+.song:hover {
+  color: #E9CADE;
+}
+
+/* Player Bar */
+
+#player-bar-container {
+  background: #F5E5EF;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+} 
+
+#buttons {
+  display: flex;
+  padding: 10px
+}
+
+#time-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: #ffffff;
+}
+
+#volume-control {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: #ffffff;
+}
+
+.seek-bar { 
+  margin:0 10px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

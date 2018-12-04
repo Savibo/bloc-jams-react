@@ -32,7 +32,10 @@ class Album extends Component {
        },
        durationchange: e => {
          this.setState({ duration: this.audioElement.duration });
-       }
+       },
+       volumeupdate: e => {
+         this.setState({ currentVolume: this.audioElement.volume });
+      }
      };
      this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
      this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
@@ -42,7 +45,8 @@ class Album extends Component {
      this.audioElement.src = null;
      this.audioElement.removeEventListener('timeupdate', this.eventListeners.timeupdate);
      this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchange);
-   }
+     this.audioElement.removeEventListener('volumeupdate', this.eventListeners.volumeupdate);
+}
  
     play() {
      this.audioElement.play();
@@ -76,7 +80,7 @@ class Album extends Component {
    }
     handleNextClick() {
      const currentIndex = this.state.album.songs.findIndex(song => this.state.currentSong === song);
-     const newIndex = Math.min((this.state.album.songs.length - 1), currentIndex + 1);
+     const newIndex = Math.max(0, currentIndex + 1);
      const newSong = this.state.album.songs[newIndex];
      this.setSong(newSong);
      this.play();
@@ -92,7 +96,6 @@ class Album extends Component {
      this.audioElement.volume = newVolume;
      this.setState ({currentVolume: newVolume});
   }
- 
     formatTime(seconds) {
      if (isNaN(seconds)) { return "-:--"; }
      const wholeSeconds = Math.floor(seconds);
@@ -105,8 +108,7 @@ class Album extends Component {
     output += remainingSeconds;
     return output;
   }
-
-   render() {
+render() {
      return (
        <section className="album">
           <section id="album-info">
@@ -115,50 +117,53 @@ class Album extends Component {
            <div className="album-details">
            <h1 id="album-title">{this.state.album.title}</h1>
            <h2 className="artist">{this.state.album.artist}</h2>
-           <div id="release-info">{this.state.album.releaseInfo}</div>
+           <div id="release-info">{this.state.album.releaseInfo} </div>
            </div>
          </section>
-           
-           <table id="song-list" className="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-
-           <colgroup>
-             <col id="song-number-column" />
-             <col id="song-title-column" />
-             <col id="song-duration-column" />
-           </colgroup>  
-           <tbody>
-             {this.state.album.songs.map( (song, index) =>
-             <tr className="song" key={index} onClick={ ()=> this.handleSongClick(song) } 
+           <section className="songs">
+          <table id="song-list" className="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+            <colgroup>
+              <col id="song-number-column" />
+              <col id="song-title-column" />
+              <col id="song-duration-column" />
+            </colgroup>
+            <tbody>
+            {this.state.album.songs.map( (song, index) =>
+              <tr className="song" key={index} onClick={ ()=> this.handleSongClick(song) } 
                 onMouseEnter={ () => this.setState({ isHovered: index+1 }) }
                 onMouseLeave={ () => this.setState({ isHovered: false }) }
               >
-              <td> <button id="song-action-btns"> 
-              { (this.state.currentSong.title === song.title) }
-                <span className="ion-pause material-icons"></span>
-                  :
-               (this.state.isHovered === index) ?
-                <span className="ion-play material-icons"></span>
 
-                  :
 
-               <span className="song-number material-icons">{index+1}</span>
+                <td className="song-actions mdl-data-table__cell--non-numeric">
+                  <button id="song-action-btns">
+
+                    { (this.state.currentSong.title === song.title) ? 
+                      <span className={ this.state.isPlaying ? "ion-pause" : "ion-play" }></span>
+                      :
+                      (this.state.isHovered === index+1) ?
+                      <span className="ion-play"></span>
+                      :
+                      <span className="song-number">{index+1}</span>
+                    }
+ 
              </button>
              </td>
               <td className="song-title mdl-data-table__cell--non-numeric">{song.title}</td>
-              <td className="song-duration mdl-data-table__cell--non-numeric">{song.duration}</td>              
+              <td className="song-duration mdl-data-table__cell--non-numeric">{ this.formatTime(song.duration) }</td>              
                 </tr>
                 )
               }  
            </tbody>
          </table> 
-         <PlayerBar />
+       
          <PlayerBar
            isPlaying={this.state.isPlaying}
            currentSong={this.state.currentSong}
            currentTime={this.audioElement.currentTime}
            duration={this.audioElement.duration}      
            currentVolume={this.state.currentVolume}
-           formatTime={(s) => this.formatTime(s)}
+           formatTime={(seconds) => this.formatTime(seconds)}
            handleSongClick={() => this.handleSongClick(this.state.currentSong)}
            handlePrevClick={() => this.handlePrevClick()}
            handleNextClick={() => this.handleNextClick()}
@@ -166,6 +171,7 @@ class Album extends Component {
            handleVolumeChange={(e) => this.handleVolumeChange(e)}
 
  />
+       </section>
         </section>
      );
    }
